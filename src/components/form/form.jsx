@@ -1,7 +1,7 @@
 import { Field, Form, Formik } from "formik";
 export default function RegisterForm() {
   return (
-    <div className="mx-auto my-10 w-[310px]">
+    <div className="w-[310px]">
       <Formik
         initialValues={{
           firstName: "",
