@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1080" height="1080" viewBox="0 0 1080 1080" xml:space="preserve">
+<desc>Created with Fabric.js 5.2.4</desc>
+<defs>
+</defs>
+<rect x="0" y="0" width="100%" height="100%" fill="transparent"></rect>
+<g transform="matrix(1 0 0 1 540 540)" id="2736aa64-026d-4cbf-a8a2-92edadcbd2ad"  >
+<rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1; visibility: hidden;" vector-effect="non-scaling-stroke"  x="-540" y="-540" rx="0" ry="0" width="1080" height="1080" />
+</g>
+<g transform="matrix(1 0 0 1 540 540)" id="6c569f4a-52de-4def-b686-082c05d80812"  >
+</g>
+<g transform="matrix(45 0 0 45 540 540)"  >
+<path style="stroke: rgb(0,0,0); stroke-width: 1.5; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;"  transform=" translate(-12, -12)" d="M 16.5 12 C 16.5 14.485281374238571 14.485281374238571 16.5 12 16.5 C 9.514718625761429 16.5 7.5 14.485281374238571 7.5 12 C 7.5 9.514718625761429 9.514718625761429 7.5 12 7.5 C 14.485281374238571 7.5 16.5 9.514718625761429 16.5 11.999999999999998 Z M 16.5 12 C 16.5 13.657 17.507 15 18.75 15 C 19.993 15 21 13.657 21 12 C 20.99996281754298 7.706333490257507 17.966913689282137 4.010615307868348 13.755742054769424 3.1729963235190546 C 9.54457042025671 2.33537733916976 5.328144466192921 4.589145754953195 3.685058750105142 8.555988508057373 C 2.0419730340173636 12.522831261161551 3.4298491234114366 17.09792905886751 6.999918471270828 19.483338237549788 C 10.569987819130219 21.86874741623206 15.327937885898592 21.40009929639743 18.363999999999997 18.364000000000004 M 16.5 12 L 16.5 8.25" stroke-linecap="round" />
+</g>
+</svg>
