@@ -12,7 +12,7 @@ export default function Contact({
   const contactsData = useContext(RootContext);
 
   return (
-    <div className="shadow-lg border border-black rounded-lg flex flex-col justify-center items-center py-4 cursor-default h-[220px] w-[250px] ">
+    <div className="bg-white shadow-lg border border-black rounded-lg flex flex-col justify-center items-center py-4 cursor-default h-[220px] w-[250px]">
       <div className="text-center py-2">
         <p className="text-base font-semibold desktop:text-lg">
           {`

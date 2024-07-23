@@ -10,32 +10,32 @@ export default function Modal() {
     contactsData.setContextState({ contacts: temp });
   }
   return (
-    <div className="w-full h-full overflow-auto bg-[#00000030] z-10 fixed top-0 left-0 flex justify-center">
-      <div className="bg-[#fefefe] rounded-lg m-auto h-64 w-72 flex text-center flex-col">
+    <div className="w-full h-full overflow-auto bg-[#00000030] z-10 fixed top-0 left-0 flex justify-center cursor-default">
+      <div className="bg-[#fefefe] rounded-lg m-auto h-56 w-[310px] desktop:w-96 flex text-center flex-col">
         <div className="py-6 flex flex-col justify-center">
-          <h1 className="text-[30px] py-4">توجه</h1>
-          <div className="text-[18px] pb-8">
+          <h1 className="text-[30px] py-4 text-red-600">توجه!</h1>
+          <div className="text-[17px] pb-7">
             {" "}
             برای حذف این مخاطب مطمئن هستید؟
           </div>
           <div className="flex gap-2 justify-center">
             <button
-              className="rounded-md py-1 px-4 bg-red-500 transition text-white hover:bg-red-700"
+              onClick={() => contactsData.setModal((prev) => !prev)}
+              className=" rounded-md py-1 px-4 bg-slate-500 transition text-white hover:bg-slate-600"
+            >
+              خیر
+            </button>
+            <button
+              className="rounded-md py-1 px-4 bg-red-500 transition text-white hover:bg-red-600"
               onClick={() => {
                 deleteContact(contactsData.modal.modalId);
                 contactsData.setModal((prev) => !prev);
                 toast.success("مخاطب با موفقیت حذف شد.", {
-                  position: "top-right",
+                  position: "top-left",
                 });
               }}
             >
               حذف
-            </button>
-            <button
-              onClick={() => contactsData.setModal((prev) => !prev)}
-              className=" rounded-md py-1 px-4 bg-slate-400 transition text-white hover:bg-slate-500"
-            >
-              خیر
             </button>
           </div>
         </div>
