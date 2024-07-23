@@ -1,6 +1,21 @@
 import { Field, Form, Formik } from "formik";
+import { useContext } from "react";
 import * as Yup from "yup";
+import { RootContext } from "../../context/RootContextProvider";
+
 export default function RegisterForm() {
+  const contactsData = useContext(RootContext);
+
+  function addNewContact(values) {
+    const existingContacts = contactsData.contextState.contacts || [];
+    const updatedContacts = [...existingContacts, values];
+
+    contactsData.setContextState({
+      ...contactsData.contextState,
+      contacts: updatedContacts,
+    });
+  }
+
   return (
     <div className="w-[310px]">
       <Formik
@@ -12,6 +27,16 @@ export default function RegisterForm() {
           email: "",
           relative: "",
         }}
+        onSubmit={(values) =>
+          addNewContact({
+            id: crypto.randomUUID(),
+            firstName: values.firstName,
+            lastName: values.lastName,
+            relative: values.relative,
+            phoneNumber: values.phoneNumber,
+            email: values.email,
+          })
+        }
         validationSchema={Yup.object({
           firstName: Yup.string()
             .required("پر کردن این فیلد الزامی می باشد.")

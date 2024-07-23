@@ -7,7 +7,7 @@ export default function Contact({
   email,
 }) {
   return (
-    <div className="shadow-contactShadow rounded-lg flex flex-col justify-center items-center py-4 cursor-default h-[250px] w-[250px] ">
+    <div className="shadow-contactShadow rounded-lg flex flex-col justify-center items-center py-4 cursor-default h-[220px] w-[250px] ">
       <div className="text-center py-2">
         <p className="text-base font-semibold desktop:text-lg">
           {`
