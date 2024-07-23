@@ -11,11 +11,6 @@ export default function Contact({
 }) {
   const contactsData = useContext(RootContext);
 
-  function deleteContact() {
-    let temp = contactsData.contextState.contacts;
-    temp = temp.filter((contact) => contact.id !== id);
-    contactsData.setContextState({ contacts: temp });
-  }
   return (
     <div className="shadow-contactShadow rounded-lg flex flex-col justify-center items-center py-4 cursor-default h-[220px] w-[250px] ">
       <div className="text-center py-2">
@@ -51,7 +46,13 @@ export default function Contact({
         <img
           src="/bin.svg"
           alt="bin"
-          onClick={deleteContact}
+          onClick={() =>
+            contactsData.setModal((prev) => ({
+              ...prev,
+              isOpen: true,
+              modalId: id,
+            }))
+          }
           className="w-5 cursor-pointer desktop:w-5"
         />
       </div>

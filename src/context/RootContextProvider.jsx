@@ -32,8 +32,15 @@ export default function RootContextProvider({ children }) {
     ],
   });
 
+  const [modal, setModal] = useState({
+    isOpen: false,
+    modalId: null,
+  });
+
   return (
-    <RootContext.Provider value={{ contextState, setContextState }}>
+    <RootContext.Provider
+      value={{ contextState, setContextState, modal, setModal }}
+    >
       {children}
     </RootContext.Provider>
   );
