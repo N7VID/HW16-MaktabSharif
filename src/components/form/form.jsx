@@ -85,7 +85,7 @@ export default function RegisterForm() {
                 className="rounded-md py-[5.5px] px-[70px] text-[#acacac]"
                 placeholder="نسبت"
               >
-                <option value="" selected disabled>
+                <option value="" disabled>
                   نسبت
                 </option>
                 <option value="اعضای خانواده">اعضای خانواده</option>
