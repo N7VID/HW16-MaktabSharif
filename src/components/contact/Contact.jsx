@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { RootContext } from "../../context/RootContextProvider";
+
 export default function Contact({
   id,
   firstName,
@@ -6,6 +9,13 @@ export default function Contact({
   phoneNumber,
   email,
 }) {
+  const contactsData = useContext(RootContext);
+
+  function deleteContact() {
+    let temp = contactsData.contextState.contacts;
+    temp = temp.filter((contact) => contact.id !== id);
+    contactsData.setContextState({ contacts: temp });
+  }
   return (
     <div className="shadow-contactShadow rounded-lg flex flex-col justify-center items-center py-4 cursor-default h-[220px] w-[250px] ">
       <div className="text-center py-2">
@@ -41,6 +51,7 @@ export default function Contact({
         <img
           src="/bin.svg"
           alt="bin"
+          onClick={deleteContact}
           className="w-5 cursor-pointer desktop:w-5"
         />
       </div>
