@@ -2,6 +2,7 @@ import { Field, Form, Formik } from "formik";
 import { useContext } from "react";
 import * as Yup from "yup";
 import { RootContext } from "../../context/RootContextProvider";
+import { toast } from "react-toastify";
 
 export default function RegisterForm() {
   const contactsData = useContext(RootContext);
@@ -35,6 +36,9 @@ export default function RegisterForm() {
             relative: values.relative,
             phoneNumber: values.phoneNumber,
             email: values.email,
+          });
+          toast.success("مخاطب با موفقیت اضافه شد.", {
+            position: "top-right",
           });
           resetForm();
         }}

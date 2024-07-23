@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { RootContext } from "../../context/RootContextProvider";
+import { toast } from "react-toastify";
 
 export default function Modal() {
   const contactsData = useContext(RootContext);
@@ -23,6 +24,9 @@ export default function Modal() {
               onClick={() => {
                 deleteContact(contactsData.modal.modalId);
                 contactsData.setModal((prev) => !prev);
+                toast.success("مخاطب با موفقیت حذف شد.", {
+                  position: "top-right",
+                });
               }}
             >
               حذف

@@ -33,3 +33,7 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+:root {
+  --toastify-font-family: yekan;
+}
