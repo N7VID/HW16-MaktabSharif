@@ -6,7 +6,7 @@ export default function ContactList() {
   const contactsData = useContext(RootContext);
 
   return (
-    <div className="px-10 py-10 flex-grow grid grid-cols-1 gap-y-8 gap-x-5 overflow-x-hidden overflow-y-hidden desktop:overflow-y-scroll custom-scrollbar desktop:grid-cols-3 tablet:grid-cols-3 desktop:h-[560px]">
+    <div className="px-10 py-20 flex-grow grid grid-cols-1 gap-y-8 gap-x-6 overflow-x-hidden overflow-y-hidden desktop:overflow-y-scroll custom-scrollbar desktop:grid-cols-3 tablet:grid-cols-2 desktop:h-[560px] max-w-[960px]">
       {contactsData.contextState.contacts.map((contact) => (
         <Contact
           key={contact.id}
