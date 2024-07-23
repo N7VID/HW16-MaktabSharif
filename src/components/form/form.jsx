@@ -27,7 +27,7 @@ export default function RegisterForm() {
           email: "",
           relative: "",
         }}
-        onSubmit={(values) =>
+        onSubmit={(values, { resetForm }) => {
           addNewContact({
             id: crypto.randomUUID(),
             firstName: values.firstName,
@@ -35,8 +35,9 @@ export default function RegisterForm() {
             relative: values.relative,
             phoneNumber: values.phoneNumber,
             email: values.email,
-          })
-        }
+          });
+          resetForm();
+        }}
         validationSchema={Yup.object({
           firstName: Yup.string()
             .required("پر کردن این فیلد الزامی می باشد.")
