@@ -118,7 +118,7 @@ export default function RegisterForm() {
                 as="select"
                 id="relative"
                 name="relative"
-                className={`rounded-md py-[5.5px] pl-[100px] pr-[40px] text-[#9d9db4] ${
+                className={`rounded-md py-[5.5px] pl-[105px] pr-[35px] text-[#9d9db4] ${
                   errors.relative ? "border-red-500 border" : ""
                 }`}
               >
