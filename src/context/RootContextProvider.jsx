@@ -37,9 +37,21 @@ export default function RootContextProvider({ children }) {
     modalId: null,
   });
 
+  const [editMode, setEditMode] = useState({
+    status: false,
+    editId: null,
+  });
+
   return (
     <RootContext.Provider
-      value={{ contextState, setContextState, modal, setModal }}
+      value={{
+        contextState,
+        setContextState,
+        modal,
+        setModal,
+        editMode,
+        setEditMode,
+      }}
     >
       {children}
     </RootContext.Provider>

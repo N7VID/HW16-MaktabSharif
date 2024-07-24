@@ -10,6 +10,7 @@ export default function Contact({
   email,
 }) {
   const contactsData = useContext(RootContext);
+  let status = contactsData.editMode.status;
 
   return (
     <div className="bg-white shadow-lg border border-black rounded-lg flex flex-col justify-center items-center py-4 cursor-default h-[220px] w-[250px]">
@@ -42,6 +43,9 @@ export default function Contact({
           src="/edit.svg"
           alt="edit"
           className="w-5 cursor-pointer desktop:w-5"
+          onClick={() => {
+            contactsData.setEditMode((prev) => ({ editId: id, status: true }));
+          }}
         />
         <img
           src="/bin.svg"
