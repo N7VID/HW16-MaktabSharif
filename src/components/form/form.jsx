@@ -1,7 +1,9 @@
-import { Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import { useContext } from "react";
-import { validationSchema } from "./schema/validationSchema";
 import { RootContext } from "../../context/RootContextProvider";
+import FieldFormik from "../field/FieldFormik";
+import FieldFormikSelect from "../field/FieldFormikSelect";
+import { validationSchema } from "./schema/validationSchema";
 
 export default function RegisterForm() {
   const {
@@ -23,7 +25,6 @@ export default function RegisterForm() {
         enableReinitialize={true}
         onSubmit={(values, { resetForm }) => {
           const { firstName, lastName, relative, phoneNumber, email } = values;
-
           const formValues = {
             firstName,
             lastName,
@@ -37,7 +38,6 @@ export default function RegisterForm() {
               ...formValues,
               id: crypto.randomUUID(),
             });
-            setDefaultInitialValues();
           } else {
             updatedContacts(editMode.editId, {
               ...formValues,
@@ -47,8 +47,8 @@ export default function RegisterForm() {
               editId: null,
               status: false,
             }));
-            setDefaultInitialValues();
           }
+          setDefaultInitialValues();
           resetForm();
         }}
       >
@@ -57,83 +57,35 @@ export default function RegisterForm() {
             <h1 className="text-center pt-4 pb-6 text-lg font-semibold">
               وب اپلیکیشن مدیریت مخاطبین
             </h1>
-            <div className="flex flex-col">
-              <Field
-                className={`rounded-md py-2 px-10 ${
-                  errors.firstName ? "border-red-500 border" : ""
-                }`}
-                placeholder="نام مخاطب"
-                name="firstName"
-                id="firstName"
-              />
-              <span className="text-red-500 text-[12px] font-semibold pt-[6px]">
-                {errors.firstName}
-              </span>
-            </div>
+            <FieldFormik
+              enName={"firstName"}
+              faName={"نام مخاطب"}
+              errors={errors.firstName}
+            />
+            <FieldFormik
+              enName={"lastName"}
+              faName={"نام خانوادگی"}
+              errors={errors.lastName}
+            />
+            <FieldFormik
+              enName={"phoneNumber"}
+              faName={"شماره تماس"}
+              errors={errors.phoneNumber}
+            />
 
-            <div className="flex flex-col">
-              <Field
-                className={`rounded-md py-2 px-10 ${
-                  errors.lastName ? "border-red-500 border" : ""
-                }`}
-                placeholder="نام خانوادگی"
-                name="lastName"
-                id="lastName"
-              />
-              <span className="text-red-500 text-[12px] font-semibold pt-[6px]">
-                {errors.lastName}
-              </span>
-            </div>
+            <FieldFormikSelect
+              enName={"relative"}
+              faName={"نسبت"}
+              errors={errors.relative}
+              options={["اعضای خانواده", "دوست", "فامیل", "همکار"]}
+            />
 
-            <div className="flex flex-col">
-              <Field
-                className={`rounded-md py-2 px-10 ${
-                  errors.phoneNumber ? "border-red-500 border" : ""
-                }`}
-                placeholder="شماره تماس"
-                name="phoneNumber"
-                id="phoneNumber"
-              />
-              <span className="text-red-500 text-[12px] font-semibold pt-[6px]">
-                {errors.phoneNumber}
-              </span>
-            </div>
+            <FieldFormik
+              enName={"email"}
+              faName={"ایمیل"}
+              errors={errors.email}
+            />
 
-            <div className="flex flex-col">
-              <Field
-                as="select"
-                id="relative"
-                name="relative"
-                className={`rounded-md py-[5.5px] pl-[105px] pr-[35px] text-[#9d9db4] ${
-                  errors.relative ? "border-red-500 border" : ""
-                }`}
-              >
-                <option value="" disabled>
-                  نسبت
-                </option>
-                <option value="اعضای خانواده">اعضای خانواده</option>
-                <option value="دوست">دوست</option>
-                <option value="همکار">همکار</option>
-                <option value="فامیل">فامیل</option>
-              </Field>
-              <span className="text-red-500 text-[12px] font-semibold pt-[6px]">
-                {errors.relative}
-              </span>
-            </div>
-
-            <div className="flex flex-col">
-              <Field
-                className={`rounded-md py-2 px-10 ${
-                  errors.email ? "border-red-500 border" : ""
-                }`}
-                placeholder="ایمیل"
-                name="email"
-                id="email"
-              />
-              <span className="text-red-500 text-[12px] font-semibold pt-[6px]">
-                {errors.email}
-              </span>
-            </div>
             <button
               type="submit"
               className={`px-[75px]  py-2 text-white rounded-lg ${

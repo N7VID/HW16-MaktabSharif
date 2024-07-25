@@ -4,7 +4,7 @@ export const contacts = [
     firstName: "نوید",
     lastName: "علی اکبری",
     relative: "دوست",
-    phoneNumber: "09135948292",
+    phoneNumber: "09129121919",
     email: "navidaliakbari.206@gmail.com",
   },
   {
@@ -12,7 +12,7 @@ export const contacts = [
     firstName: "یونس",
     lastName: "علی خاصی",
     relative: "دوست",
-    phoneNumber: "09135948292",
+    phoneNumber: "09129121919",
     email: "younes.206@gmail.com",
   },
   {
@@ -20,7 +20,7 @@ export const contacts = [
     firstName: "نیما",
     lastName: "عالمیان",
     relative: "همکار",
-    phoneNumber: "09135948292",
+    phoneNumber: "09129121919",
     email: "nimalamian@yahoo.com",
   },
   {
@@ -28,7 +28,7 @@ export const contacts = [
     firstName: "میثم",
     lastName: "فرزعلیان",
     relative: "دوست",
-    phoneNumber: "09121212365",
+    phoneNumber: "09129121919",
     email: "meysamfarzalian@yahoo.com",
   },
   {
@@ -36,7 +36,7 @@ export const contacts = [
     firstName: "محمد عرفان",
     lastName: "مزید آبادی فراهانی",
     relative: "دوست",
-    phoneNumber: "09124588855",
+    phoneNumber: "09129121919",
     email: "erfanmazidabadi@gmail.com",
   },
   {
@@ -44,7 +44,7 @@ export const contacts = [
     firstName: "علیرضا",
     lastName: "قرقابی",
     relative: "دوست",
-    phoneNumber: "09152547859",
+    phoneNumber: "09129121919",
     email: "alirezagharghabi@yahoo.com",
   },
   {
@@ -52,7 +52,7 @@ export const contacts = [
     firstName: "علی",
     lastName: "کوشش",
     relative: "دوست",
-    phoneNumber: "09152547859",
+    phoneNumber: "09129121919",
     email: "alikoshesh@yahoo.com",
   },
   {
@@ -60,7 +60,7 @@ export const contacts = [
     firstName: "سعید",
     lastName: "لک",
     relative: "دوست",
-    phoneNumber: "09152547859",
+    phoneNumber: "09129121919",
     email: "saeidlak@gmail.com",
   },
   {
@@ -68,7 +68,7 @@ export const contacts = [
     firstName: "پوریا",
     lastName: "عصرزاد",
     relative: "دوست",
-    phoneNumber: "09152547859",
+    phoneNumber: "09129121919",
     email: "asrzadpouria@yahoo.com",
   },
   {
@@ -76,7 +76,7 @@ export const contacts = [
     firstName: "سروش",
     lastName: "علیزاده",
     relative: "همکار",
-    phoneNumber: "09121212365",
+    phoneNumber: "09129121919",
     email: "soroushalizadeh@yahoo.com",
   },
   {
@@ -84,7 +84,7 @@ export const contacts = [
     firstName: "امیرعلی",
     lastName: "اقدامی",
     relative: "دوست",
-    phoneNumber: "09124588855",
+    phoneNumber: "09129121919",
     email: "amiralieghdami.12@yahoo.com",
   },
   {
@@ -92,7 +92,7 @@ export const contacts = [
     firstName: "امین",
     lastName: "احسانیان",
     relative: "دوست",
-    phoneNumber: "09152547859",
+    phoneNumber: "09129121919",
     email: "aminehsanian@yahoo.com",
   },
 ];
