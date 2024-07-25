@@ -2,19 +2,9 @@ import { Field, Form, Formik } from "formik";
 import { useContext } from "react";
 import * as Yup from "yup";
 import { RootContext } from "../../context/RootContextProvider";
-import { toast } from "react-toastify";
 
 export default function RegisterForm() {
   const contactsData = useContext(RootContext);
-
-  let initialValues = {
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-    Relative: "",
-    email: "",
-    relative: "",
-  };
 
   let validationSchema = Yup.object({
     firstName: Yup.string()
@@ -38,43 +28,17 @@ export default function RegisterForm() {
     relative: Yup.string().required("نسبت خود با مخاطب را انتخاب کنید."),
   });
 
-  function addNewContact(values) {
-    const existingContacts = contactsData.contextState.contacts || [];
-    const updatedContacts = [...existingContacts, values];
-
-    contactsData.setContextState({
-      ...contactsData.contextState,
-      contacts: updatedContacts,
-    });
-    toast.success("مخاطب با موفقیت اضافه شد.", {
-      position: "top-left",
-    });
-  }
-
-  function updatedContacts(id, values) {
-    let existingContacts = contactsData.contextState.contacts || [];
-    let updatedContact = existingContacts.map((user) =>
-      user.id === id ? (user = values) : user
-    );
-    contactsData.setContextState({
-      ...contactsData.contextState,
-      contacts: updatedContact,
-    });
-    toast.success("مخاطب با موفقیت به روزرسانی شد.", {
-      position: "top-left",
-    });
-  }
-
   return (
     <div className="w-[310px]">
       <Formik
-        initialValues={initialValues}
+        initialValues={contactsData.initialValues}
         validationSchema={validationSchema}
         validateOnChange={false}
         validateOnBlur={false}
+        enableReinitialize={true}
         onSubmit={(values, { resetForm }) => {
           if (!contactsData.editMode.status) {
-            addNewContact({
+            contactsData.addNewContact({
               id: crypto.randomUUID(),
               firstName: values.firstName,
               lastName: values.lastName,
@@ -82,9 +46,10 @@ export default function RegisterForm() {
               phoneNumber: values.phoneNumber,
               email: values.email,
             });
+            contactsData.setDefaultInitialValues();
             resetForm();
           } else {
-            updatedContacts(contactsData.editMode.editId, {
+            contactsData.updatedContacts(contactsData.editMode.editId, {
               id: contactsData.editMode.editId,
               firstName: values.firstName,
               lastName: values.lastName,
@@ -96,6 +61,7 @@ export default function RegisterForm() {
               editId: null,
               status: false,
             }));
+            contactsData.setDefaultInitialValues();
             resetForm();
           }
         }}
@@ -194,12 +160,13 @@ export default function RegisterForm() {
             </button>
             {contactsData.editMode.status && (
               <button
-                onClick={() =>
+                onClick={() => {
                   contactsData.setEditMode(() => ({
                     editId: null,
                     status: false,
-                  }))
-                }
+                  }));
+                  contactsData.setDefaultInitialValues();
+                }}
                 className={`px-[104px] mb-4 -mt-2 py-2 text-white rounded-lg updateGradient`}
               >
                 لغو

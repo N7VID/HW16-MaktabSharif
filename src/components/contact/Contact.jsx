@@ -44,7 +44,14 @@ export default function Contact({
           alt="edit"
           className="w-5 cursor-pointer desktop:w-5"
           onClick={() => {
-            contactsData.setEditMode((prev) => ({ editId: id, status: true }));
+            contactsData.setEditMode(() => ({ editId: id, status: true }));
+            contactsData.setInitialValues({
+              firstName: firstName,
+              lastName: lastName,
+              phoneNumber: phoneNumber,
+              email: email,
+              relative: relative,
+            });
           }}
         />
         <img
