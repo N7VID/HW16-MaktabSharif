@@ -1,32 +1,10 @@
 import { Field, Form, Formik } from "formik";
 import { useContext } from "react";
-import * as Yup from "yup";
+import { validationSchema } from "./validationSchema";
 import { RootContext } from "../../context/RootContextProvider";
 
 export default function RegisterForm() {
   const contactsData = useContext(RootContext);
-
-  let validationSchema = Yup.object({
-    firstName: Yup.string()
-      .required("پر کردن این فیلد الزامی می باشد.")
-      .min(3, "نام حداقل دارای سه حرف باشد."),
-    lastName: Yup.string()
-      .required("پر کردن این فیلد الزامی می باشد.")
-      .min(4, "نام خانوادگی حداقل دارای چهار حرف باشد."),
-
-    phoneNumber: Yup.string()
-      .required("پر کردن این فیلد الزامی می باشد.")
-      .matches(
-        /((0?9)|(\+?989))\d{2}\W?\d{3}\W?\d{4}/g,
-        "پیش شماره را به درستی وارد کنید."
-      )
-      .max(14, "حداکثر چهارده رقم معتبر است.")
-      .min(10, "حداقل ده رقم معتبر است."),
-    email: Yup.string()
-      .required("پر کردن این فیلد الزامی می باشد.")
-      .email("فرمت ایمیل معتبر نیست."),
-    relative: Yup.string().required("نسبت خود با مخاطب را انتخاب کنید."),
-  });
 
   return (
     <div className="w-[310px]">
