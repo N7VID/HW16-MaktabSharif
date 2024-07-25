@@ -145,7 +145,7 @@ export default function RegisterForm() {
                   }));
                   contactsData.setDefaultInitialValues();
                 }}
-                className={`px-[104px] mb-4 -mt-2 py-2 text-white rounded-lg updateGradient`}
+                className={`px-[104px] mb-4 -mt-2 py-2 text-white rounded-lg secondaryGradient`}
               >
                 لغو
               </button>
