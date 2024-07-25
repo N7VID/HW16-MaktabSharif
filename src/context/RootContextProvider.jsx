@@ -6,7 +6,7 @@ export const RootContext = createContext();
 
 export default function RootContextProvider({ children }) {
   const [contextState, setContextState] = useState({
-    contacts: [],
+    contacts,
   });
 
   const [modal, setModal] = useState({

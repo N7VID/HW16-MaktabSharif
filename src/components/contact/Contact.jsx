@@ -53,18 +53,27 @@ export default function Contact({
             });
           }}
         />
-        <img
-          src="/bin.svg"
-          alt="bin"
-          onClick={() =>
-            contactsData.setModal((prev) => ({
-              ...prev,
-              isOpen: true,
-              modalId: id,
-            }))
-          }
-          className="w-5 cursor-pointer desktop:w-5"
-        />
+        {contactsData.editMode.status ? (
+          <img
+            src="/bin-disabled.svg"
+            alt="bin"
+            disabled
+            className="w-5 desktop:w-5"
+          />
+        ) : (
+          <img
+            src="/bin.svg"
+            alt="bin"
+            onClick={() =>
+              contactsData.setModal((prev) => ({
+                ...prev,
+                isOpen: true,
+                modalId: id,
+              }))
+            }
+            className="w-5 cursor-pointer desktop:w-5"
+          />
+        )}
       </div>
     </div>
   );
