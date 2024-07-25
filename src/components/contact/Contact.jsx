@@ -10,12 +10,11 @@ export default function Contact({
   email,
 }) {
   const contactsData = useContext(RootContext);
-  let status = contactsData.editMode.status;
 
   return (
     <div className="bg-white shadow-lg border border-black rounded-lg flex flex-col justify-center items-center py-4 cursor-default h-[220px] w-[250px]">
       <div className="text-center py-2">
-        <p className="text-base font-semibold desktop:text-lg">
+        <p className="text-base font-semibold desktop:text-lg whitespace-nowrap overflow-hidden text-ellipsis w-52">
           {`
           ${firstName}
           ${lastName}
