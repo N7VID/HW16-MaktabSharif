@@ -1,47 +1,55 @@
 import { Field, Form, Formik } from "formik";
 import { useContext } from "react";
-import { validationSchema } from "./validationSchema";
+import { validationSchema } from "./schema/validationSchema";
 import { RootContext } from "../../context/RootContextProvider";
 
 export default function RegisterForm() {
-  const contactsData = useContext(RootContext);
+  const {
+    initialValues,
+    editMode,
+    addNewContact,
+    updatedContacts,
+    setEditMode,
+    setDefaultInitialValues,
+  } = useContext(RootContext);
 
   return (
     <div className="w-[310px]">
       <Formik
-        initialValues={contactsData.initialValues}
+        initialValues={initialValues}
         validationSchema={validationSchema}
         validateOnChange={false}
         validateOnBlur={false}
         enableReinitialize={true}
         onSubmit={(values, { resetForm }) => {
-          if (!contactsData.editMode.status) {
-            contactsData.addNewContact({
+          const { firstName, lastName, relative, phoneNumber, email } = values;
+
+          const formValues = {
+            firstName,
+            lastName,
+            relative,
+            phoneNumber,
+            email,
+          };
+
+          if (!editMode.status) {
+            addNewContact({
+              ...formValues,
               id: crypto.randomUUID(),
-              firstName: values.firstName,
-              lastName: values.lastName,
-              relative: values.relative,
-              phoneNumber: values.phoneNumber,
-              email: values.email,
             });
-            contactsData.setDefaultInitialValues();
-            resetForm();
+            setDefaultInitialValues();
           } else {
-            contactsData.updatedContacts(contactsData.editMode.editId, {
-              id: contactsData.editMode.editId,
-              firstName: values.firstName,
-              lastName: values.lastName,
-              relative: values.relative,
-              phoneNumber: values.phoneNumber,
-              email: values.email,
+            updatedContacts(editMode.editId, {
+              ...formValues,
+              id: editMode.editId,
             });
-            contactsData.setEditMode(() => ({
+            setEditMode(() => ({
               editId: null,
               status: false,
             }));
-            contactsData.setDefaultInitialValues();
-            resetForm();
+            setDefaultInitialValues();
           }
+          resetForm();
         }}
       >
         {({ errors }) => (
@@ -129,21 +137,19 @@ export default function RegisterForm() {
             <button
               type="submit"
               className={`px-[75px]  py-2 text-white rounded-lg ${
-                contactsData.editMode.status
-                  ? "mainGradient mt-4"
-                  : "mainGradient m-4"
+                editMode.status ? "mainGradient mt-4" : "mainGradient m-4"
               } `}
             >
-              {contactsData.editMode.status ? "به روزرسانی" : "اضافه کردن"}
+              {editMode.status ? "به روزرسانی" : "اضافه کردن"}
             </button>
-            {contactsData.editMode.status && (
+            {editMode.status && (
               <button
                 onClick={() => {
-                  contactsData.setEditMode(() => ({
+                  setEditMode(() => ({
                     editId: null,
                     status: false,
                   }));
-                  contactsData.setDefaultInitialValues();
+                  setDefaultInitialValues();
                 }}
                 className={`px-[104px] mb-4 -mt-2 py-2 text-white rounded-lg secondaryGradient`}
               >

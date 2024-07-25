@@ -3,11 +3,12 @@ import { RootContext } from "../../context/RootContextProvider";
 import { toast } from "react-toastify";
 
 export default function Modal() {
-  const contactsData = useContext(RootContext);
+  const { contextState, setContextState, setModal, modal } =
+    useContext(RootContext);
   function deleteContact(id) {
-    let temp = contactsData.contextState.contacts;
+    let temp = contextState.contacts;
     temp = temp.filter((contact) => contact.id !== id);
-    contactsData.setContextState({ contacts: temp });
+    setContextState({ contacts: temp });
   }
   return (
     <div className="w-full h-full overflow-auto bg-[#00000030] z-10 fixed top-0 left-0 flex justify-center cursor-default">
@@ -20,7 +21,7 @@ export default function Modal() {
           </div>
           <div className="flex gap-2 justify-center">
             <button
-              onClick={() => contactsData.setModal((prev) => !prev)}
+              onClick={() => setModal((prev) => !prev)}
               className=" rounded-md py-1 px-4 bg-[#A9A9A9] transition text-white hover:bg-[#808080]"
             >
               خیر
@@ -28,8 +29,8 @@ export default function Modal() {
             <button
               className="rounded-md py-1 px-4 bg-[#FF0000] transition text-white hover:bg-[#CC0000]"
               onClick={() => {
-                deleteContact(contactsData.modal.modalId);
-                contactsData.setModal((prev) => !prev);
+                deleteContact(modal.modalId);
+                setModal((prev) => !prev);
                 toast.success("مخاطب با موفقیت حذف شد.", {
                   position: "top-left",
                 });

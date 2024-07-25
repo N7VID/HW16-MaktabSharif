@@ -9,7 +9,8 @@ export default function Contact({
   phoneNumber,
   email,
 }) {
-  const contactsData = useContext(RootContext);
+  const { setModal, editMode, setEditMode, setInitialValues } =
+    useContext(RootContext);
 
   return (
     <div className="bg-white shadow-lg border border-black rounded-lg flex flex-col justify-center items-center py-4 cursor-default h-[220px] w-[250px]">
@@ -43,8 +44,8 @@ export default function Contact({
           alt="edit"
           className="w-5 cursor-pointer desktop:w-5"
           onClick={() => {
-            contactsData.setEditMode(() => ({ editId: id, status: true }));
-            contactsData.setInitialValues({
+            setEditMode(() => ({ editId: id, status: true }));
+            setInitialValues({
               firstName: firstName,
               lastName: lastName,
               phoneNumber: phoneNumber,
@@ -53,7 +54,7 @@ export default function Contact({
             });
           }}
         />
-        {contactsData.editMode.status ? (
+        {editMode.status ? (
           <img
             src="/bin-disabled.svg"
             alt="bin"
@@ -65,7 +66,7 @@ export default function Contact({
             src="/bin.svg"
             alt="bin"
             onClick={() =>
-              contactsData.setModal((prev) => ({
+              setModal((prev) => ({
                 ...prev,
                 isOpen: true,
                 modalId: id,
