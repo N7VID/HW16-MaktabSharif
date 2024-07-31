@@ -10,7 +10,8 @@ import { toast } from "react-toastify";
 
 export default function RegisterForm() {
   const queryClient = useQueryClient();
-  const { isError, error, mutate, data } = useMutation({
+
+  const { mutate: createContact } = useMutation({
     mutationFn: async (value) => {
       const res = await axios.post("http://localhost:5000/contacts", value);
       return res.data;
@@ -21,16 +22,39 @@ export default function RegisterForm() {
         position: "top-left",
       });
     },
+    onError: (error) => {
+      toast.error(`Error: ${error.message}`, {
+        position: "top-left",
+        rtl: false,
+      });
+    },
   });
-  // console.log(data);
-  const {
-    initialValues,
-    editMode,
-    // addNewContact,
-    updatedContacts,
-    setEditMode,
-    setDefaultInitialValues,
-  } = useContext(RootContext);
+
+  const { mutate: updateContacts } = useMutation({
+    mutationFn: async (value) => {
+      const { id, ...patchValues } = value;
+      const res = await axios.patch(
+        `http://localhost:5000/contacts/${id}`,
+        patchValues
+      );
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("contacts");
+      toast.success("مخاطب با موفقیت ویرایش شد.", {
+        position: "top-left",
+      });
+    },
+    onError: (error) => {
+      toast.error(`Error: ${error.message}`, {
+        position: "top-left",
+        rtl: false,
+      });
+    },
+  });
+
+  const { initialValues, editMode, setEditMode, setDefaultInitialValues } =
+    useContext(RootContext);
 
   return (
     <div className="w-[310px]">
@@ -51,13 +75,13 @@ export default function RegisterForm() {
           };
 
           if (!editMode.status) {
-            mutate({
+            createContact({
               ...formValues,
             });
           } else {
-            updatedContacts(editMode.editId, {
-              ...formValues,
+            updateContacts({
               id: editMode.editId,
+              ...formValues,
             });
             setEditMode(() => ({
               editId: null,
