@@ -1,15 +1,38 @@
 import { useContext } from "react";
 import { RootContext } from "../../context/RootContextProvider";
 import { toast } from "react-toastify";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
 
 export default function Modal() {
-  const { contextState, setContextState, setModal, modal } =
-    useContext(RootContext);
-  function deleteContact(id) {
-    let temp = contextState.contacts;
-    temp = temp.filter((contact) => contact.id !== id);
-    setContextState({ contacts: temp });
-  }
+  const { setModal, modal } = useContext(RootContext);
+  // function deleteContact(id) {
+  //   let temp = contextState.contacts;
+  //   temp = temp.filter((contact) => contact.id !== id);
+  //   setContextState({ contacts: temp });
+  // }
+
+  const queryClient = useQueryClient();
+
+  const { mutate: deleteContact } = useMutation({
+    mutationFn: async (id) => {
+      const res = await axios.delete(`http://localhost:5000/contacts/${id}`);
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("contacts");
+      toast.success("مخاطب با موفقیت حذف شد.", {
+        position: "top-left",
+      });
+    },
+    onError: (error) => {
+      toast.error(error.message, {
+        position: "top-left",
+        rtl: false,
+      });
+    },
+  });
+
   return (
     <div className="w-full h-full overflow-auto bg-[#00000030] z-10 fixed top-0 left-0 flex justify-center cursor-default">
       <div className="bg-[#fefefe] rounded-lg m-auto h-56 w-[310px] desktop:w-96 flex text-center flex-col">
@@ -17,7 +40,7 @@ export default function Modal() {
           <h1 className="text-[30px] py-4 text-red-600">توجه!</h1>
           <div className="text-[18px] pb-7">
             {" "}
-            برای حذف این مخاطب مطمئن هستید؟
+            برای حذف این مخاطب اطمینان دارید؟
           </div>
           <div className="flex gap-2 justify-center">
             <button
