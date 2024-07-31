@@ -1,13 +1,11 @@
 import { Form, Formik } from "formik";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { RootContext } from "../../context/RootContextProvider";
+import usePostItem from "../../hooks/usePostItem";
 import FieldFormik from "../field/FieldFormik";
 import FieldFormikSelect from "../field/FieldFormikSelect";
 import { validationSchema } from "./schema/validationSchema";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
-import { toast } from "react-toastify";
-import usePostItem from "../../hooks/usePostItem";
+import usePatchItem from "../../hooks/usePatchItem";
 
 export default function RegisterForm() {
   const { createContact } = usePostItem({
@@ -15,33 +13,18 @@ export default function RegisterForm() {
     queryKey: "contacts",
     successMessage: "مخاطب با موفقیت اضافه شد.",
   });
-
   function handleSubmitPostContact(value) {
     createContact(value);
   }
 
-  // const { mutate: updateContacts } = useMutation({
-  //   mutationFn: async (value) => {
-  //     const { id, ...patchValues } = value;
-  //     const res = await axios.patch(
-  //       `http://localhost:5000/contacts/${id}`,
-  //       patchValues
-  //     );
-  //     return res.data;
-  //   },
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries("contacts");
-  //     toast.success("مخاطب با موفقیت ویرایش شد.", {
-  //       position: "top-left",
-  //     });
-  //   },
-  //   onError: (error) => {
-  //     toast.error(`Error: ${error.message}`, {
-  //       position: "top-left",
-  //       rtl: false,
-  //     });
-  //   },
-  // });
+  const { updateContacts } = usePatchItem({
+    url: "http://localhost:5000/contacts",
+    queryKey: "contacts",
+    successMessage: "مخاطب با موفقیت ویرایش شد.",
+  });
+  function handleSubmitPatchContact(value) {
+    updateContacts(value);
+  }
 
   const { initialValues, editMode, setEditMode, setDefaultInitialValues } =
     useContext(RootContext);
@@ -69,10 +52,10 @@ export default function RegisterForm() {
               ...formValues,
             });
           } else {
-            // updateContacts({
-            //   id: editMode.editId,
-            //   ...formValues,
-            // });
+            handleSubmitPatchContact({
+              id: editMode.editId,
+              ...formValues,
+            });
             setEditMode(() => ({
               editId: null,
               status: false,
