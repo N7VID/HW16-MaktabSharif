@@ -7,51 +7,41 @@ import { validationSchema } from "./schema/validationSchema";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
+import usePostItem from "../../hooks/usePostItem";
 
 export default function RegisterForm() {
-  const queryClient = useQueryClient();
-
-  const { mutate: createContact } = useMutation({
-    mutationFn: async (value) => {
-      const res = await axios.post("http://localhost:5000/contacts", value);
-      return res.data;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries("contacts");
-      toast.success("مخاطب با موفقیت اضافه شد.", {
-        position: "top-left",
-      });
-    },
-    onError: (error) => {
-      toast.error(`Error: ${error.message}`, {
-        position: "top-left",
-        rtl: false,
-      });
-    },
+  const { createContact } = usePostItem({
+    url: "http://localhost:5000/contacts",
+    queryKey: "contacts",
+    successMessage: "مخاطب با موفقیت اضافه شد.",
   });
 
-  const { mutate: updateContacts } = useMutation({
-    mutationFn: async (value) => {
-      const { id, ...patchValues } = value;
-      const res = await axios.patch(
-        `http://localhost:5000/contacts/${id}`,
-        patchValues
-      );
-      return res.data;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries("contacts");
-      toast.success("مخاطب با موفقیت ویرایش شد.", {
-        position: "top-left",
-      });
-    },
-    onError: (error) => {
-      toast.error(`Error: ${error.message}`, {
-        position: "top-left",
-        rtl: false,
-      });
-    },
-  });
+  function handleSubmitPostContact(value) {
+    createContact(value);
+  }
+
+  // const { mutate: updateContacts } = useMutation({
+  //   mutationFn: async (value) => {
+  //     const { id, ...patchValues } = value;
+  //     const res = await axios.patch(
+  //       `http://localhost:5000/contacts/${id}`,
+  //       patchValues
+  //     );
+  //     return res.data;
+  //   },
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries("contacts");
+  //     toast.success("مخاطب با موفقیت ویرایش شد.", {
+  //       position: "top-left",
+  //     });
+  //   },
+  //   onError: (error) => {
+  //     toast.error(`Error: ${error.message}`, {
+  //       position: "top-left",
+  //       rtl: false,
+  //     });
+  //   },
+  // });
 
   const { initialValues, editMode, setEditMode, setDefaultInitialValues } =
     useContext(RootContext);
@@ -75,14 +65,14 @@ export default function RegisterForm() {
           };
 
           if (!editMode.status) {
-            createContact({
+            handleSubmitPostContact({
               ...formValues,
             });
           } else {
-            updateContacts({
-              id: editMode.editId,
-              ...formValues,
-            });
+            // updateContacts({
+            //   id: editMode.editId,
+            //   ...formValues,
+            // });
             setEditMode(() => ({
               editId: null,
               status: false,
