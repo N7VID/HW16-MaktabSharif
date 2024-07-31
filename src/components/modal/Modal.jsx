@@ -1,37 +1,23 @@
 import { useContext } from "react";
-import { RootContext } from "../../context/RootContextProvider";
 import { toast } from "react-toastify";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+import { RootContext } from "../../context/RootContextProvider";
+import useDeleteItem from "../../hooks/useDeleteItem";
 
 export default function Modal() {
   const { setModal, modal } = useContext(RootContext);
-  // function deleteContact(id) {
-  //   let temp = contextState.contacts;
-  //   temp = temp.filter((contact) => contact.id !== id);
-  //   setContextState({ contacts: temp });
-  // }
 
-  const queryClient = useQueryClient();
-
-  const { mutate: deleteContact } = useMutation({
-    mutationFn: async (id) => {
-      const res = await axios.delete(`http://localhost:5000/contacts/${id}`);
-      return res.data;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries("contacts");
-      toast.success("مخاطب با موفقیت حذف شد.", {
-        position: "top-left",
-      });
-    },
-    onError: (error) => {
-      toast.error(error.message, {
-        position: "top-left",
-        rtl: false,
-      });
-    },
+  const { deleteItem } = useDeleteItem({
+    url: `http://localhost:5000/contacts`,
+    queryKey: "contacts",
+    successMessage: "مخاطب با موفقیت حذف شد.",
   });
+  function handleDeleteBtn(id) {
+    //Version.1
+    // let temp = contextState.contacts;
+    // temp = temp.filter((contact) => contact.id !== id);
+    // setContextState({ contacts: temp });
+    deleteItem(id);
+  }
 
   return (
     <div className="w-full h-full overflow-auto bg-[#00000030] z-10 fixed top-0 left-0 flex justify-center cursor-default">
@@ -52,7 +38,7 @@ export default function Modal() {
             <button
               className="rounded-md py-1 px-4 bg-[#FF0000] transition text-white hover:bg-[#CC0000]"
               onClick={() => {
-                deleteContact(modal.modalId);
+                handleDeleteBtn(modal.modalId);
                 setModal((prev) => !prev);
                 toast.success("مخاطب با موفقیت حذف شد.", {
                   position: "top-left",
