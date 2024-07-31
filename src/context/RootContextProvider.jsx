@@ -1,3 +1,5 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
 import { createContext, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -36,17 +38,18 @@ export default function RootContextProvider({ children }) {
     });
   };
 
-  function addNewContact(values) {
-    const existingContacts = contextState.contacts || [];
-    const updatedContacts = [...existingContacts, values];
-    setContextState({
-      ...contextState,
-      contacts: updatedContacts,
-    });
-    toast.success("مخاطب با موفقیت اضافه شد.", {
-      position: "top-left",
-    });
-  }
+  // function addNewContact(values) {
+  //   const existingContacts = contextState.contacts || [];
+  //   const updatedContacts = [...existingContacts, values];
+  //   setContextState({
+  //     ...contextState,
+  //     contacts: updatedContacts,
+  //   });
+
+  //   toast.success("مخاطب با موفقیت اضافه شد.", {
+  //     position: "top-left",
+  //   });
+  // }
 
   function updatedContacts(id, values) {
     let existingContacts = contextState.contacts || [];
@@ -75,7 +78,7 @@ export default function RootContextProvider({ children }) {
         setInitialValues,
         setDefaultInitialValues,
         updatedContacts,
-        addNewContact,
+        // addNewContact,
       }}
     >
       {children}

@@ -1,15 +1,32 @@
 import { Form, Formik } from "formik";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { RootContext } from "../../context/RootContextProvider";
 import FieldFormik from "../field/FieldFormik";
 import FieldFormikSelect from "../field/FieldFormikSelect";
 import { validationSchema } from "./schema/validationSchema";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function RegisterForm() {
+  const queryClient = useQueryClient();
+  const { isError, error, mutate, data } = useMutation({
+    mutationFn: async (value) => {
+      const res = await axios.post("http://localhost:5000/contacts", value);
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("contacts");
+      toast.success("مخاطب با موفقیت اضافه شد.", {
+        position: "top-left",
+      });
+    },
+  });
+  // console.log(data);
   const {
     initialValues,
     editMode,
-    addNewContact,
+    // addNewContact,
     updatedContacts,
     setEditMode,
     setDefaultInitialValues,
@@ -34,9 +51,8 @@ export default function RegisterForm() {
           };
 
           if (!editMode.status) {
-            addNewContact({
+            mutate({
               ...formValues,
-              id: crypto.randomUUID(),
             });
           } else {
             updatedContacts(editMode.editId, {
