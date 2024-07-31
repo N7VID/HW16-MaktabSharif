@@ -6,6 +6,7 @@ import { RootContext } from "../../context/RootContextProvider";
 import ContactList from "../contactList/ContactList";
 import RegisterForm from "../form/form";
 import Modal from "../modal/Modal";
+import { toast } from "react-toastify";
 
 export default function ContactsApp() {
   const { setContextState } = useContext(RootContext);
@@ -17,6 +18,7 @@ export default function ContactsApp() {
   const { isError, error, data, isLoading } = useQuery({
     queryKey: ["contacts"],
     queryFn,
+    retry: 2,
   });
 
   useEffect(() => {
@@ -26,6 +28,10 @@ export default function ContactsApp() {
   }, [data, setContextState]);
 
   const { modal } = useContext(RootContext);
+
+  if (isError) {
+    toast.error(error.message, { position: "top-left", rtl: false });
+  }
 
   return (
     <div className="font-yekan flex justify-around items-center flex-col py-10 desktop:flex-row desktop:h-screen  desktop:px-4 desktop:gap-[70px] bg-[#fafafa]">
