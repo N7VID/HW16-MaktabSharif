@@ -70,7 +70,6 @@ export default function Contact({
                 ...prev,
                 isOpen: true,
                 modalId: id,
-                type: "each item",
               }))
             }
             className="w-5 cursor-pointer desktop:w-5"

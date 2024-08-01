@@ -2,41 +2,21 @@ import { useContext } from "react";
 import { toast } from "react-toastify";
 import { RootContext } from "../../context/RootContextProvider";
 import useDeleteItem from "../../hooks/useDeleteItem";
-import useDeleteItems from "../../hooks/useDeleteAllItems";
 
-export default function Modal({ type }) {
+export default function Modal() {
   const { setModal, modal } = useContext(RootContext);
-  let mainTitleModal;
-  const url = `http://localhost:5000/contacts`;
-  const queryKey = "contacts";
-  let successMessage;
-  switch (type) {
-    case "each item":
-      mainTitleModal = "برای حذف این مخاطب اطمینان دارید؟";
-      successMessage = "مخاطب با موفقیت حذف شد.";
-      break;
-    case "all items":
-      mainTitleModal = "برای حذف تمامی مخاطبین اطمینان دارید؟";
-      successMessage = "مخاطبین با موفقیت حذف شدند.";
-      break;
 
-    default:
-      break;
-  }
   const { deleteItem } = useDeleteItem({
-    url,
-    queryKey,
-    successMessage,
+    url: `http://localhost:5000/contacts`,
+    queryKey: "contacts",
+    successMessage: "مخاطب با موفقیت حذف شد.",
   });
-
-  const { deleteItems } = useDeleteItems({
-    url,
-    queryKey,
-    successMessage,
-  });
-
   function handleDeleteBtn(id) {
-    type === "each item" ? deleteItem(id) : deleteItems();
+    //Version.1
+    // let temp = contextState.contacts;
+    // temp = temp.filter((contact) => contact.id !== id);
+    // setContextState({ contacts: temp });
+    deleteItem(id);
   }
 
   return (
@@ -44,7 +24,10 @@ export default function Modal({ type }) {
       <div className="bg-[#fefefe] rounded-lg m-auto h-56 w-[310px] desktop:w-96 flex text-center flex-col">
         <div className="py-6 flex flex-col justify-center">
           <h1 className="text-[30px] py-4 text-red-600">توجه!</h1>
-          <div className="text-[18px] pb-7"> {mainTitleModal}</div>
+          <div className="text-[18px] pb-7">
+            {" "}
+            برای حذف این مخاطب اطمینان دارید؟
+          </div>
           <div className="flex gap-2 justify-center">
             <button
               onClick={() => setModal((prev) => !prev)}
