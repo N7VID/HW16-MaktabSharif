@@ -10,6 +10,7 @@ export default function RootContextProvider({ children }) {
   const [modal, setModal] = useState({
     isOpen: false,
     modalId: null,
+    type: null,
   });
 
   const [editMode, setEditMode] = useState({

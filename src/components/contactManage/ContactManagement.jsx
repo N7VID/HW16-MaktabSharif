@@ -1,7 +1,19 @@
+import { useContext } from "react";
+import { RootContext } from "../../context/RootContextProvider";
+
 export default function ContactManagement() {
+  const { setModal } = useContext(RootContext);
   return (
     <div className="w-[250px] rounded-md pt-12 desktop:pt-0 flex items-center gap-4 desktop:w-[800px] tablet:w-[500px]">
-      <button>
+      <button
+        onClick={() =>
+          setModal((prev) => ({
+            ...prev,
+            isOpen: true,
+            type: "all items",
+          }))
+        }
+      >
         <img
           src="/deleteAll.svg"
           alt="delete-all"
