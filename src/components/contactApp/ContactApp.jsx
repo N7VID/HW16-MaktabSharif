@@ -7,6 +7,7 @@ import ContactList from "../contactList/ContactList";
 import RegisterForm from "../form/form";
 import Modal from "../modal/Modal";
 import { toast } from "react-toastify";
+import ContactManagement from "../contactManage/ContactManagement";
 
 export default function ContactsApp() {
   const { setContextState } = useContext(RootContext);
@@ -45,7 +46,10 @@ export default function ContactsApp() {
           className="w-[200px] h-[200px] py-8"
         />
       ) : (
-        <ContactList />
+        <div className="flex flex-col justify-center items-center">
+          <ContactManagement />
+          <ContactList />
+        </div>
       )}
     </div>
   );
