@@ -1,22 +1,27 @@
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { RootContext } from "../../context/RootContextProvider";
 import ContactList from "../contactList/ContactList";
 import RegisterForm from "../form/form";
 import Modal from "../modal/Modal";
 import { toast } from "react-toastify";
+import Pagination from "../pagination/Pagination";
 
 export default function ContactsApp() {
-  const { setContextState } = useContext(RootContext);
+  const [totalItems, setTotalItems] = useState(0);
+  const { setContextState, params, setParams } = useContext(RootContext);
 
   async function queryFn() {
-    const res = await axios.get("http://localhost:5000/contacts");
+    const res = await axios.get(
+      `http://localhost:5000/contacts?_page=${params.page}&_limit=${params.limit}`
+    );
+    setTotalItems(+res.headers["x-total-count"]);
     return res.data;
   }
   const { isError, error, data, isLoading } = useQuery({
-    queryKey: ["contacts"],
+    queryKey: ["contacts", params.page],
     queryFn,
     retry: 2,
   });
@@ -45,7 +50,16 @@ export default function ContactsApp() {
           className="w-[200px] h-[200px] py-8"
         />
       ) : (
-        <ContactList />
+        <div className="flex flex-col justify-center items-center">
+          <ContactList />
+          <Pagination
+            params={params}
+            totalItems={totalItems}
+            itemsPerPage={params.limit}
+            currentPage={params.page}
+            onPageChange={setParams}
+          />
+        </div>
       )}
     </div>
   );

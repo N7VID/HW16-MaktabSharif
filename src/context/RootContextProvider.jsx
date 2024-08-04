@@ -25,6 +25,11 @@ export default function RootContextProvider({ children }) {
     relative: "",
   });
 
+  const [params, setParams] = useState({
+    page: 1,
+    limit: 6,
+  });
+
   const setDefaultInitialValues = () => {
     setInitialValues({
       firstName: "",
@@ -35,36 +40,11 @@ export default function RootContextProvider({ children }) {
     });
   };
 
-  // function addNewContact(values) {
-  //   const existingContacts = contextState.contacts || [];
-  //   const updatedContacts = [...existingContacts, values];
-  //   setContextState({
-  //     ...contextState,
-  //     contacts: updatedContacts,
-  //   });
-
-  //   toast.success("مخاطب با موفقیت اضافه شد.", {
-  //     position: "top-left",
-  //   });
-  // }
-
-  // function updatedContacts(id, values) {
-  //   let existingContacts = contextState.contacts || [];
-  //   let updatedContact = existingContacts.map((user) =>
-  //     user.id === id ? (user = values) : user
-  //   );
-  //   setContextState({
-  //     ...contextState,
-  //     contacts: updatedContact,
-  //   });
-  //   toast.success("مخاطب با موفقیت به روزرسانی شد.", {
-  //     position: "top-left",
-  //   });
-  // }
-
   return (
     <RootContext.Provider
       value={{
+        params,
+        setParams,
         contextState,
         setContextState,
         modal,
@@ -74,8 +54,6 @@ export default function RootContextProvider({ children }) {
         initialValues,
         setInitialValues,
         setDefaultInitialValues,
-        // updatedContacts,
-        // addNewContact,
       }}
     >
       {children}
