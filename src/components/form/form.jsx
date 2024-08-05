@@ -66,7 +66,7 @@ export default function RegisterForm() {
         }}
       >
         {({ errors }) => (
-          <Form className="flex flex-col justify-center items-center rounded-2xl shadow-xl shadow-slate-300 p-3 gap-4 bg-[#e5e5e5] cursor-default">
+          <Form className="flex flex-col justify-center items-center rounded-2xl shadow-xl shadow-slate-300 p-3 gap-[22px] bg-[#e5e5e5] cursor-default">
             <h1 className="text-center pt-4 pb-6 text-lg font-semibold">
               وب اپلیکیشن مدیریت مخاطبین
             </h1>
