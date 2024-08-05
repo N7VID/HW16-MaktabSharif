@@ -8,6 +8,7 @@ import RegisterForm from "../form/form";
 import Modal from "../modal/Modal";
 import { toast } from "react-toastify";
 import Pagination from "../pagination/Pagination";
+import ContactManagement from "../contactManagement/ContactManagement";
 
 export default function ContactsApp() {
   const [totalItems, setTotalItems] = useState(0);
@@ -51,6 +52,7 @@ export default function ContactsApp() {
         />
       ) : !isError ? (
         <div className="flex flex-col justify-center items-center">
+          <ContactManagement />
           <ContactList />
           <Pagination
             params={params}
