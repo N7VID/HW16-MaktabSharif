@@ -7,7 +7,7 @@ export default function ContactList() {
 
   if (contextState?.contacts?.length !== 0) {
     return (
-      <div className="px-10 py-20 desktop:py-10 flex-grow grid grid-cols-1 gap-y-8 gap-x-6 overflow-x-hidden overflow-y-hidden desktop:overflow-y-scroll custom-scrollbar desktop:grid-cols-3 tablet:grid-cols-2 desktop:h-[560px] max-w-[900px]">
+      <div className="px-10 py-20 desktop:py-10 flex-grow grid grid-cols-1 gap-y-8 gap-x-6 desktop:grid-cols-3 tablet:grid-cols-2 desktop:h-[560px] max-w-[900px]">
         {contextState?.contacts?.map((contact) => (
           <Contact
             key={contact.id}
