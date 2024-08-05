@@ -44,21 +44,25 @@ export default function Pagination({
   }
 
   return (
-    <div className="flex justify-center items-center gap-4">
+    <div className="flex justify-center items-center desktop:gap-4 tablet:gap-4 gap-2">
       <button
-        className="w-10 h-10 transition hover:bg-slate-200 flex items-center justify-center rounded-full"
+        className="desktop:w-10 desktop:h-10 tablet:w-9 tablet:h-9 w-6 h-6 transition hover:bg-slate-200 flex items-center justify-center rounded-full"
         onClick={() => onPageChange({ ...params, page: currentPage - 1 })}
         disabled={currentPage === 1}
       >
-        <img src="/right-black.svg" className="w-5" alt="" />
+        <img
+          src="/right-black.svg"
+          className="desktop:w-5 tablet:w-5 w-4"
+          alt=""
+        />
       </button>
-      <div className="flex items-center gap-4 shadow-lg min-w-64 justify-center py-2 rounded-xl px-6">
+      <div className="flex items-center desktop:gap-4 tablet:gap-4 gap-2 shadow-lg desktop:min-w-64 tablet:min-w-64 min-w-40 justify-center py-2 rounded-xl desktop:px-6 tablet:px-6s px-2">
         {getPageNumbers().map((page, index) => (
           <button
             key={index}
             disabled={page === "..."}
             onClick={() => onPageChange({ ...params, page: page })}
-            className={`w-7 h-7 rounded-full ${
+            className={`desktop:w-7 desktop:h-7 tablet:w-6 tablet:h-6 w-5 h-5 rounded-full text-center flex justify-center items-center ${
               currentPage === page && page !== "..."
                 ? "bg-black text-white"
                 : ""
@@ -69,11 +73,15 @@ export default function Pagination({
         ))}
       </div>
       <button
-        className="w-10 h-10 transition hover:bg-slate-200 flex items-center justify-center rounded-full"
+        className="desktop:w-10 desktop:h-10 tablet:w-10 tablet:h-10 w-6 h-6 transition hover:bg-slate-200 flex items-center justify-center rounded-full"
         onClick={() => onPageChange({ ...params, page: currentPage + 1 })}
         disabled={currentPage === totalPages}
       >
-        <img src="/left-black.svg" className="w-5" alt="" />
+        <img
+          src="/left-black.svg"
+          className="desktop:w-5 tablet:w-5 w-4"
+          alt=""
+        />
       </button>
     </div>
   );
