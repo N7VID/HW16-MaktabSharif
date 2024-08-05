@@ -15,7 +15,9 @@ export default function FieldFormikSelect({ faName, enName, errors, options }) {
           {faName}
         </option>
         {options.map((option) => (
-          <option value={option}>{option}</option>
+          <option key={option} value={option}>
+            {option}
+          </option>
         ))}
       </Field>
       <span className="text-red-500 text-[12px] font-semibold pt-[6px]">
