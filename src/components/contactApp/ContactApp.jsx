@@ -23,7 +23,7 @@ export default function ContactsApp() {
   const { isError, error, data, isLoading } = useQuery({
     queryKey: ["contacts", params.page],
     queryFn,
-    retry: 2,
+    retry: 1,
   });
 
   useEffect(() => {
@@ -61,9 +61,15 @@ export default function ContactsApp() {
           />
         </div>
       ) : (
-        <div className="flex flex-col justify-center items-center">
-          <img src="/error-black.svg" alt="error" className="w-64" />
-          <h1 className="text-xl font-semibold">{error.message}</h1>
+        <div className="flex flex-col justify-center items-center desktop:py-0 py-10 cursor-default">
+          <img
+            src="/error-black.svg"
+            alt="error"
+            className="desktop:w-64 tablet:w-52 w-48"
+          />
+          <h1 className="desktop:text-xl tablet:text-lg font-semibold">
+            {error.message}
+          </h1>
         </div>
       )}
     </div>
