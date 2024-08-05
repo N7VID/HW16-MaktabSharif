@@ -49,7 +49,7 @@ export default function ContactsApp() {
           loop
           className="w-[200px] h-[200px] py-8"
         />
-      ) : (
+      ) : !isError ? (
         <div className="flex flex-col justify-center items-center">
           <ContactList />
           <Pagination
@@ -59,6 +59,11 @@ export default function ContactsApp() {
             currentPage={params.page}
             onPageChange={setParams}
           />
+        </div>
+      ) : (
+        <div className="flex flex-col justify-center items-center">
+          <img src="/error-black.svg" alt="error" className="w-64" />
+          <h1 className="text-xl font-semibold">{error.message}</h1>
         </div>
       )}
     </div>
