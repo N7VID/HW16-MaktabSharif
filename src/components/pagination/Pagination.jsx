@@ -44,7 +44,7 @@ export default function Pagination({
   }
 
   return (
-    <div className="flex justify-center items-center desktop:gap-4 tablet:gap-4 gap-2">
+    <div className="flex justify-center items-center gap-2">
       <button
         className="desktop:w-10 desktop:h-10 tablet:w-9 tablet:h-9 w-6 h-6 transition hover:bg-slate-200 flex items-center justify-center rounded-full"
         onClick={() => onPageChange({ ...params, page: currentPage - 1 })}
