@@ -7,7 +7,7 @@ export default function FieldFormikSelect({ faName, enName, errors, options }) {
         as="select"
         id={enName}
         name={enName}
-        className={`rounded-md py-[5.5px] pl-[105px] pr-[35px] text-[#9d9db4] ${
+        className={`rounded-md py-[5.5px] pl-[105px] pr-[35px] text-[#9d9db4] dark:bg-[#eee] ${
           errors ? "border-red-500 border" : ""
         }`}
       >
@@ -20,7 +20,7 @@ export default function FieldFormikSelect({ faName, enName, errors, options }) {
           </option>
         ))}
       </Field>
-      <span className="text-red-500 text-[12px] font-semibold pt-[6px]">
+      <span className="text-red-500 dark:text-red-400 text-[12px] font-semibold pt-[6px]">
         {errors}
       </span>
     </div>

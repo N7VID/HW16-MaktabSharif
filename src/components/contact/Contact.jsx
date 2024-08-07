@@ -9,13 +9,13 @@ export default function Contact({
   phoneNumber,
   email,
 }) {
-  const { setModal, editMode, setEditMode, setInitialValues } =
+  const { setModal, editMode, setEditMode, setInitialValues, theme } =
     useContext(RootContext);
 
   return (
-    <div className="bg-white shadow-lg border border-black rounded-lg flex flex-col justify-center items-center py-4 cursor-default h-[220px] w-[250px]">
+    <div className="bg-white shadow-lg border border-black rounded-lg flex flex-col justify-center items-center py-4 cursor-default h-[220px] w-[250px] dark:bg-[#383A56] dark:border-white transition duration-300">
       <div className="text-center py-2">
-        <p className="text-base font-semibold desktop:text-lg whitespace-nowrap overflow-hidden text-ellipsis w-52">
+        <p className="text-base font-semibold desktop:text-lg whitespace-nowrap overflow-hidden text-ellipsis w-52 dark:text-white">
           {`
           ${firstName}
           ${lastName}
@@ -40,7 +40,7 @@ export default function Contact({
       </div>
       <div className="flex gap-4 py-2">
         <img
-          src="/edit.svg"
+          src={theme === "light" ? `/edit.svg` : `edit-white.svg`}
           alt="edit"
           className="w-5 cursor-pointer desktop:w-5"
           onClick={() => {
@@ -63,7 +63,7 @@ export default function Contact({
           />
         ) : (
           <img
-            src="/bin.svg"
+            src={theme === "light" ? `/bin.svg` : `bin-white.svg`}
             alt="bin"
             onClick={() =>
               setModal((prev) => ({

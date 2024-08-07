@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { RootContext } from "../../context/RootContextProvider";
+
 export default function Pagination({
   params,
   totalItems,
@@ -43,28 +46,30 @@ export default function Pagination({
     return pages;
   }
 
+  const { theme } = useContext(RootContext);
+
   return (
     <div className="flex justify-center items-center gap-2">
       <button
-        className="desktop:w-10 desktop:h-10 tablet:w-9 tablet:h-9 w-6 h-6 transition hover:bg-slate-200 flex items-center justify-center rounded-full"
+        className="desktop:w-10 desktop:h-10 tablet:w-9 tablet:h-9 w-6 h-6 transition hover:bg-slate-200 flex items-center justify-center rounded-full dark:hover:bg-slate-600"
         onClick={() => onPageChange({ ...params, page: currentPage - 1 })}
         disabled={currentPage === 1}
       >
         <img
-          src="/right-black.svg"
+          src={theme === "light" ? `/right-black.svg` : `/right-white.svg`}
           className="desktop:w-5 tablet:w-5 w-4"
           alt=""
         />
       </button>
-      <div className="flex items-center desktop:gap-4 tablet:gap-4 gap-2 shadow-lg desktop:min-w-64 tablet:min-w-64 min-w-40 justify-center py-2 rounded-xl desktop:px-6 tablet:px-6s px-2">
+      <div className="flex items-center desktop:gap-4 tablet:gap-4 gap-2 shadow-lg desktop:min-w-64 tablet:min-w-64 min-w-40 justify-center py-2 rounded-xl desktop:px-6 tablet:px-6s px-2 bg-white dark:bg-[#383A56] transition duration-300">
         {getPageNumbers().map((page, index) => (
           <button
             key={index}
             disabled={page === "..."}
             onClick={() => onPageChange({ ...params, page: page })}
-            className={`desktop:w-7 desktop:h-7 tablet:w-6 tablet:h-6 w-5 h-5 rounded-full text-center flex justify-center items-center ${
+            className={`desktop:w-7 desktop:h-7 tablet:w-6 tablet:h-6 w-5 h-5 rounded-full text-center flex justify-center items-center dark:text-white border border-black dark:border-slate-200 ${
               currentPage === page && page !== "..."
-                ? "bg-black text-white"
+                ? "bg-black text-white dark:bg-slate-200 dark:text-black"
                 : ""
             }`}
           >
@@ -73,12 +78,12 @@ export default function Pagination({
         ))}
       </div>
       <button
-        className="desktop:w-10 desktop:h-10 tablet:w-10 tablet:h-10 w-6 h-6 transition hover:bg-slate-200 flex items-center justify-center rounded-full"
+        className="desktop:w-10 desktop:h-10 tablet:w-10 tablet:h-10 w-6 h-6 transition hover:bg-slate-200 flex items-center justify-center rounded-full dark:hover:bg-slate-600"
         onClick={() => onPageChange({ ...params, page: currentPage + 1 })}
         disabled={currentPage === totalPages}
       >
         <img
-          src="/left-black.svg"
+          src={theme === "light" ? `/left-black.svg` : `/left-white.svg`}
           className="desktop:w-5 tablet:w-5 w-4"
           alt=""
         />
