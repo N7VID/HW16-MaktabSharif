@@ -4,20 +4,20 @@ import { RootContext } from "../../context/RootContextProvider";
 export default function ThemeSwitcher() {
   const { toggleTheme, theme } = useContext(RootContext);
   return (
-    <div className="flex justify-end gap-1 items-center">
+    <div className="flex justify-end items-center">
       <img
         src={theme === "light" ? `sun-black.svg` : `sun-white.svg`}
         className="w-5"
-        alt="moon"
+        alt="sun icon"
       />
       <div className="w-16">
         <div
-          className="bg-black dark:bg-slate-200 max-w-[45px] min-h-[25px] mx-auto rounded-3xl flex items-center cursor-pointer"
+          className="relative bg-black dark:bg-slate-200 max-w-[45px] min-h-[25px] mx-auto rounded-3xl flex items-center cursor-pointer"
           onClick={toggleTheme}
         >
           <div
-            className={`bg-gray-200 dark:bg-gray-800 w-5 h-5 -ml-6 rounded-full transition duration-300 ${
-              theme === "dark" ? "-translate-x-6" : ""
+            className={`bg-gray-200 dark:bg-gray-800 w-5 h-5 absolute top-[2.5px] right-[2.5px] rounded-full transition duration-300 ${
+              theme === "dark" ? "-translate-x-[21.5px]" : ""
             }`}
           ></div>
         </div>
@@ -25,7 +25,7 @@ export default function ThemeSwitcher() {
       <img
         src={theme === "light" ? `moon-black.svg` : `moon-white.svg`}
         className="w-4"
-        alt="moon"
+        alt="moon icon"
       />
     </div>
   );
