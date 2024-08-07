@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const RootContext = createContext();
 
@@ -36,6 +36,21 @@ export default function RootContextProvider({ children }) {
     search: "",
   });
 
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    document.documentElement.classList.add(theme);
+    localStorage.setItem("theme", theme);
+
+    return () => {
+      document.documentElement.classList.remove(theme);
+    };
+  }, [theme]);
+
+  function toggleTheme() {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  }
+
   const setDefaultInitialValues = () => {
     setInitialValues({
       firstName: "",
@@ -49,6 +64,8 @@ export default function RootContextProvider({ children }) {
   return (
     <RootContext.Provider
       value={{
+        theme,
+        toggleTheme,
         params,
         setParams,
         searchInput,
