@@ -40,7 +40,7 @@ export default function ContactsApp() {
   }
 
   return (
-    <div className="font-yekan flex justify-around items-center flex-col py-10 desktop:flex-row h-screen desktop:px-4 desktop:gap-[70px] bg-[#fafafa] dark:bg-[#2F3032] transition duration-300">
+    <div className="font-yekan flex justify-around items-center flex-col py-10 desktop:flex-row desktop:h-screen min-h-screen desktop:px-4 desktop:gap-[70px] bg-[#fafafa] dark:bg-[#2F3032] transition duration-300">
       {modal.isOpen && <Modal />}
       <RegisterForm />
       {isLoading ? (
