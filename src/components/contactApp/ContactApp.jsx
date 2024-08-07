@@ -12,17 +12,18 @@ import ContactManagement from "../contactManagement/ContactManagement";
 
 export default function ContactsApp() {
   const [totalItems, setTotalItems] = useState(0);
-  const { setContextState, params, setParams } = useContext(RootContext);
+  const { setContextState, params, setParams, searchInput } =
+    useContext(RootContext);
 
   async function queryFn() {
     const res = await axios.get(
-      `http://localhost:5000/contacts?_page=${params.page}&_limit=${params.limit}`
+      `http://localhost:5000/contacts?q=${params.search}&_page=${params.page}&_limit=${params.limit}`
     );
     setTotalItems(+res.headers["x-total-count"]);
     return res.data;
   }
   const { isError, error, data, isLoading } = useQuery({
-    queryKey: ["contacts", params.page],
+    queryKey: ["contacts", params],
     queryFn,
     retry: 1,
   });

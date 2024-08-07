@@ -1,34 +1,36 @@
+import { useContext } from "react";
+import { RootContext } from "../../context/RootContextProvider";
+import ThemeSwitcher from "../themeSwitch/ThemeSwitcher";
+
 export default function ContactManagement() {
+  const { handleSearchInput, searchInput, setSearchInput } =
+    useContext(RootContext);
   return (
-    <div className="grid grid-cols-3 w-full max-w-[800px] justify-between items-center">
+    <div className="desktop:grid desktop:grid-cols-3 w-full desktop:max-w-[800px] max-w-[500px] flex flex-col gap-6 justify-between items-center pt-14 desktop:py-0">
       <div className="relative">
         <img
           src="/search icon.svg"
           alt=""
+          onClick={handleSearchInput}
           className="w-7 absolute right-1 top-[6px] cursor-pointer"
         />
-        <input placeholder="جستجو" className="rounded-md py-2 px-10" />
+        <input
+          placeholder="جستجو"
+          className="rounded-md py-2 px-10"
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+        />
       </div>
 
-      <h1 className="text-center text-2xl cursor-default">لیست مخاطبین</h1>
+      <h1 className="text-center text-2xl cursor-default hidden desktop:block">
+        لیست مخاطبین
+      </h1>
 
-      <div className="flex justify-end gap-1 items-center">
-        <img src="sun-black.svg" className="w-5" alt="moon" />
-        <div class="w-16">
-          <div
-            class={`${
-              true ? "translate-x-11" : ""
-            }container bg-[#2f3640] max-w-[45px] min-h-[25px] mx-auto rounded-3xl flex items-center cursor-pointer`}
-            id="Switch"
-          >
-            <div
-              class="bg-gray-200 w-5 h-5 rounded-full transition ml-[4px] duration-300"
-              id="circle"
-            ></div>
-          </div>
-        </div>
-        <img src="moon-black.svg" className="w-4" alt="moon" />
-      </div>
+      <ThemeSwitcher />
+
+      <h1 className="text-center text-2xl cursor-default desktop:hidden pt-4">
+        لیست مخاطبین
+      </h1>
     </div>
   );
 }

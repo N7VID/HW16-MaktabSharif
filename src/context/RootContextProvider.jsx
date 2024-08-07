@@ -17,6 +17,11 @@ export default function RootContextProvider({ children }) {
     editId: null,
   });
 
+  const [searchInput, setSearchInput] = useState("");
+  const handleSearchInput = () => {
+    setParams({ ...params, search: searchInput });
+  };
+
   const [initialValues, setInitialValues] = useState({
     firstName: "",
     lastName: "",
@@ -28,6 +33,7 @@ export default function RootContextProvider({ children }) {
   const [params, setParams] = useState({
     page: 1,
     limit: 6,
+    search: "",
   });
 
   const setDefaultInitialValues = () => {
@@ -45,6 +51,9 @@ export default function RootContextProvider({ children }) {
       value={{
         params,
         setParams,
+        searchInput,
+        setSearchInput,
+        handleSearchInput,
         contextState,
         setContextState,
         modal,

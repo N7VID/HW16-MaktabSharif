@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Slide, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ContactsApp from "./components/contactApp/ContactApp";
-import { Slide, ToastContainer } from "react-toastify";
 
 const queryClient = new QueryClient();
 
