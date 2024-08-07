@@ -16,7 +16,7 @@ export default function Modal() {
   }
 
   return (
-    <div className="w-full h-full overflow-auto bg-[#00000044] z-10 fixed top-0 left-0 flex justify-center cursor-default">
+    <div className="w-full h-full overflow-auto bg-[#00000054] z-10 fixed top-0 left-0 flex justify-center cursor-default">
       <div className="bg-[#fefefe] rounded-lg m-auto h-56 w-[310px] desktop:w-96 flex text-center flex-col dark:bg-[#2F3032]">
         <div className="py-6 flex flex-col justify-center">
           <h1 className="text-[30px] py-4 text-red-600">توجه!</h1>
