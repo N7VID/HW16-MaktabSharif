@@ -22,6 +22,8 @@ export default function RootContextProvider({ children }) {
     setParams({ ...params, search: searchInput });
   };
 
+  const [totalItems, setTotalItems] = useState(0);
+
   const [initialValues, setInitialValues] = useState({
     firstName: "",
     lastName: "",
@@ -67,6 +69,8 @@ export default function RootContextProvider({ children }) {
         theme,
         toggleTheme,
         params,
+        totalItems,
+        setTotalItems,
         setParams,
         searchInput,
         setSearchInput,

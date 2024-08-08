@@ -1,31 +1,18 @@
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
+import { toast } from "react-toastify";
 import { RootContext } from "../../context/RootContextProvider";
+import { useGetContacts } from "../../hooks/useGetContacts";
 import ContactList from "../contactList/ContactList";
+import ContactManagement from "../contactManagement/ContactManagement";
 import RegisterForm from "../form/form";
 import Modal from "../modal/Modal";
-import { toast } from "react-toastify";
 import Pagination from "../pagination/Pagination";
-import ContactManagement from "../contactManagement/ContactManagement";
 
 export default function ContactsApp() {
-  const [totalItems, setTotalItems] = useState(0);
-  const { setContextState, params, setParams, theme } = useContext(RootContext);
-
-  async function queryFn() {
-    const res = await axios.get(
-      `http://localhost:5000/contacts?q=${params.search}&_page=${params.page}&_limit=${params.limit}`
-    );
-    setTotalItems(+res.headers["x-total-count"]);
-    return res.data;
-  }
-  const { isError, error, data, isLoading } = useQuery({
-    queryKey: ["contacts", params],
-    queryFn,
-    retry: 1,
-  });
+  const { setContextState, params, setParams, theme, totalItems } =
+    useContext(RootContext);
+  const { isError, error, data, isLoading } = useGetContacts();
 
   useEffect(() => {
     setContextState({
