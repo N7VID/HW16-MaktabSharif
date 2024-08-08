@@ -3,15 +3,24 @@ import { RootContext } from "../../context/RootContextProvider";
 import ThemeSwitcher from "../themeSwitch/ThemeSwitcher";
 
 export default function ContactManagement() {
-  const { handleSearchInput, searchInput, setSearchInput, theme } =
-    useContext(RootContext);
+  const {
+    handleSearchInput,
+    searchInput,
+    setSearchInput,
+    theme,
+    setParams,
+    params,
+  } = useContext(RootContext);
   return (
     <div className="desktop:grid desktop:grid-cols-3 w-full desktop:max-w-[800px] max-w-[500px] flex flex-col gap-6 justify-between items-center pt-14 desktop:py-0">
       <div className="relative">
         <img
           src={theme === "light" ? `/search icon.svg` : `search icon white.svg`}
           alt=""
-          onClick={handleSearchInput}
+          onClick={() => {
+            setSearchInput("");
+            handleSearchInput();
+          }}
           className="w-7 absolute right-1 top-[6px] cursor-pointer"
         />
         <input
@@ -22,7 +31,13 @@ export default function ContactManagement() {
         />
       </div>
 
-      <h1 className="text-center text-2xl cursor-default hidden desktop:block dark:text-white transition">
+      <h1
+        className="text-center text-2xl cursor-pointer hidden desktop:block dark:text-white transition"
+        onClick={() => {
+          setParams({ ...params, search: "" });
+          setSearchInput("");
+        }}
+      >
         لیست مخاطبین
       </h1>
 
