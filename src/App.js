@@ -13,6 +13,7 @@ export default function App() {
       <ToastContainer
         transition={Slide}
         limit={1}
+        position="top-left"
         rtl
         theme={theme === "light" ? "light" : "dark"}
       />

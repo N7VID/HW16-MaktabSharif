@@ -8,13 +8,12 @@ import { validationSchema } from "./schema/validationSchema";
 import usePatchItem from "../../hooks/usePatchItem";
 
 export default function RegisterForm() {
-  const { createContact } = usePostItem({
-    url: "http://localhost:5000/contacts",
+  const { mutate } = usePostItem({
     queryKey: "contacts",
     successMessage: "مخاطب با موفقیت اضافه شد.",
   });
   function handleSubmitPostContact(value) {
-    createContact(value);
+    mutate(value);
   }
 
   const { updateContacts } = usePatchItem({
