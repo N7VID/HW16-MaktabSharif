@@ -13,6 +13,7 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <ToastContainer
         transition={Slide}
+        limit={1}
         rtl
         theme={theme === "light" ? `light` : "dark"}
       />
