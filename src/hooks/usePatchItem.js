@@ -1,27 +1,19 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import { toast } from "react-toastify";
+import { patchContacts } from "../api/patchContacts.api";
 
-export default function usePatchItem({ url, queryKey, successMessage }) {
+export default function usePatchItem({ queryKey, successMessage }) {
   const queryClient = useQueryClient();
-  const { mutate: updateContacts } = useMutation({
-    mutationFn: async (value) => {
-      const { id, ...patchValues } = value;
-      const res = await axios.patch(`${url}/${id}`, patchValues);
-      return res.data;
-    },
+  return useMutation({
+    mutationFn: (data) => patchContacts(data, data.id),
     onSuccess: () => {
       queryClient.invalidateQueries(queryKey);
-      toast.success(successMessage, {
-        position: "top-left",
-      });
+      toast.success(successMessage);
     },
     onError: (error) => {
       toast.error(`Error: ${error.message}`, {
-        position: "top-left",
         rtl: false,
       });
     },
   });
-  return { updateContacts };
 }

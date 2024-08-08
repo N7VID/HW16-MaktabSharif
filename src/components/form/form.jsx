@@ -16,8 +16,7 @@ export default function RegisterForm() {
     mutate(value);
   }
 
-  const { updateContacts } = usePatchItem({
-    url: "http://localhost:5000/contacts",
+  const { mutate: updateContacts } = usePatchItem({
     queryKey: "contacts",
     successMessage: "مخاطب با موفقیت ویرایش شد.",
   });
