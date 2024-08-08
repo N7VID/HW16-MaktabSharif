@@ -67,10 +67,10 @@ export default function Pagination({
             key={index}
             disabled={page === "..."}
             onClick={() => onPageChange({ ...params, page: page })}
-            className={`desktop:w-7 desktop:h-7 tablet:w-6 tablet:h-6 w-5 h-5 rounded-full text-center flex justify-center items-center dark:text-white border border-black dark:border-slate-200 ${
+            className={`desktop:w-7 desktop:h-7 tablet:w-6 tablet:h-6 w-5 h-5 rounded-full text-center flex justify-center items-center border border-black dark:border-slate-200 ${
               currentPage === page && page !== "..."
                 ? "bg-black text-white dark:bg-slate-200 dark:text-black"
-                : ""
+                : "dark:text-white"
             }`}
           >
             {page}
