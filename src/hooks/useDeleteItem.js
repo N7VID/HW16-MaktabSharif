@@ -1,28 +1,20 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import { toast } from "react-toastify";
+import { deleteContacts } from "../api/deleteContacts.api";
 
-export default function useDeleteItem({ url, queryKey, successMessage }) {
+export default function useDeleteItem({ queryKey, successMessage }) {
   const queryClient = useQueryClient();
 
-  const { mutate: deleteItem } = useMutation({
-    mutationFn: async (id) => {
-      const res = await axios.delete(url + `/${id}`);
-      return res.data;
-    },
+  return useMutation({
+    mutationFn: (id) => deleteContacts(id),
     onSuccess: () => {
       queryClient.invalidateQueries(queryKey);
-      toast.success(successMessage, {
-        position: "top-left",
-      });
+      toast.success(successMessage);
     },
     onError: (error) => {
       toast.error(error.message, {
-        position: "top-left",
         rtl: false,
       });
     },
   });
-
-  return { deleteItem };
 }

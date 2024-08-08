@@ -6,8 +6,7 @@ import useDeleteItem from "../../hooks/useDeleteItem";
 export default function Modal() {
   const { setModal, modal } = useContext(RootContext);
 
-  const { deleteItem } = useDeleteItem({
-    url: `http://localhost:5000/contacts`,
+  const { mutate: deleteItem } = useDeleteItem({
     queryKey: "contacts",
     successMessage: "مخاطب با موفقیت حذف شد.",
   });
