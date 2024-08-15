@@ -8,6 +8,15 @@ import { validationSchema } from "./schema/validationSchema";
 import usePatchItem from "../../hooks/usePatchItem";
 
 export default function RegisterForm() {
+  const {
+    initialValues,
+    editMode,
+    setEditMode,
+    setDefaultInitialValues,
+    contextState,
+    setContextState,
+  } = useContext(RootContext);
+
   const { mutate } = usePostItem({
     queryKey: "contacts",
     successMessage: "مخاطب با موفقیت اضافه شد.",
@@ -24,8 +33,17 @@ export default function RegisterForm() {
     updateContacts(value);
   }
 
-  const { initialValues, editMode, setEditMode, setDefaultInitialValues } =
-    useContext(RootContext);
+  // function handleSubmitPostContact(value) {
+  //   setContextState({ contacts: [...contextState.contacts, value] });
+  // }
+
+  // function handleSubmitPatchContact(value) {
+  //   const { id } = value;
+  //   const updatedContact = contextState.contacts.map((item) =>
+  //     item.id === id ? (item = value) : item
+  //   );
+  //   setContextState({ contacts: updatedContact });
+  // }
 
   return (
     <div className="w-[310px]">

@@ -4,13 +4,19 @@ import { RootContext } from "../../context/RootContextProvider";
 import useDeleteItem from "../../hooks/useDeleteItem";
 
 export default function Modal() {
-  const { setModal, modal } = useContext(RootContext);
+  const { setModal, modal, contextState, setContextState } =
+    useContext(RootContext);
 
   const { mutate: deleteItem } = useDeleteItem({
     queryKey: "contacts",
     successMessage: "مخاطب با موفقیت حذف شد.",
   });
   function handleDeleteBtn(id) {
+    // let remainingContacts = contextState.contacts.filter(
+    //   (contact) => contact.id !== id
+    // );
+    // setContextState({ contacts: remainingContacts });
+
     deleteItem(id);
   }
 
