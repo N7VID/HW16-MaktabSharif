@@ -41,9 +41,6 @@ export default function Modal() {
               onClick={() => {
                 handleDeleteBtn(modal.modalId);
                 setModal((prev) => !prev);
-                toast.success("مخاطب با موفقیت حذف شد.", {
-                  position: "top-left",
-                });
               }}
             >
               حذف
