@@ -10,13 +10,12 @@ import Modal from "../modal/Modal";
 import Pagination from "../pagination/Pagination";
 
 export default function ContactsApp() {
-  const { setContextState, params, setParams, theme, totalItems } =
-    useContext(RootContext);
+  const { setContextState, params, setParams, theme } = useContext(RootContext);
   const { isError, error, data, isLoading } = useGetContacts();
 
   useEffect(() => {
     setContextState({
-      contacts: data,
+      contacts: data?.data,
     });
   }, [data, setContextState]);
 
@@ -49,7 +48,7 @@ export default function ContactsApp() {
           <ContactList />
           <Pagination
             params={params}
-            totalItems={totalItems}
+            totalItems={data?.totalContacts}
             itemsPerPage={params.limit}
             currentPage={params.page}
             onPageChange={setParams}

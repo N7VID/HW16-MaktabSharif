@@ -1,16 +1,15 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { RootContext } from "../../context/RootContextProvider";
 import ThemeSwitcher from "../themeSwitch/ThemeSwitcher";
 
 export default function ContactManagement() {
-  const {
-    handleSearchInput,
-    searchInput,
-    setSearchInput,
-    theme,
-    setParams,
-    params,
-  } = useContext(RootContext);
+  const { theme, setParams, params } = useContext(RootContext);
+
+  const [searchInput, setSearchInput] = useState("");
+  const handleSearchInput = () => {
+    setParams({ ...params, search: searchInput });
+  };
+
   return (
     <div className="desktop:grid desktop:grid-cols-3 w-full desktop:max-w-[800px] max-w-[500px] flex flex-col gap-6 justify-between items-center pt-14 desktop:py-0">
       <div className="relative">
@@ -18,8 +17,10 @@ export default function ContactManagement() {
           src={theme === "light" ? `/search icon.svg` : `search icon white.svg`}
           alt=""
           onClick={() => {
-            setSearchInput("");
-            handleSearchInput();
+            if (searchInput !== "") {
+              setSearchInput("");
+              handleSearchInput();
+            }
           }}
           className="w-7 absolute right-1 top-[6px] cursor-pointer"
         />

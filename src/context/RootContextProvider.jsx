@@ -17,13 +17,6 @@ export default function RootContextProvider({ children }) {
     editId: null,
   });
 
-  const [searchInput, setSearchInput] = useState("");
-  const handleSearchInput = () => {
-    setParams({ ...params, search: searchInput });
-  };
-
-  const [totalItems, setTotalItems] = useState(0);
-
   const [initialValues, setInitialValues] = useState({
     firstName: "",
     lastName: "",
@@ -69,12 +62,7 @@ export default function RootContextProvider({ children }) {
         theme,
         toggleTheme,
         params,
-        totalItems,
-        setTotalItems,
         setParams,
-        searchInput,
-        setSearchInput,
-        handleSearchInput,
         contextState,
         setContextState,
         modal,

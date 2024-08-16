@@ -4,9 +4,9 @@ import { useContext } from "react";
 import { RootContext } from "../context/RootContextProvider";
 
 export const useGetContacts = () => {
-  const { params, setTotalItems } = useContext(RootContext);
+  const { params } = useContext(RootContext);
   return useQuery({
     queryKey: ["contacts", params],
-    queryFn: () => fetchContacts(setTotalItems, params),
+    queryFn: () => fetchContacts(params),
   });
 };

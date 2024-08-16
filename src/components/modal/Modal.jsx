@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { toast } from "react-toastify";
 import { RootContext } from "../../context/RootContextProvider";
 import useDeleteItem from "../../hooks/useDeleteItem";
 
